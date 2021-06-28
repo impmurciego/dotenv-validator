@@ -1,0 +1,28 @@
+{
+    "name": "impmurciego/dotenv-validator",
+    "type": "library",
+    "description": "Validate Dotenv files",
+    "keywords": ["Dotenv", "Validator"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Inés Perez",
+            "email": "impmurciego@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1|^8.0",
+        "symfony/dotenv": "5.2.*",
+        "symfony/console": "^5.3",
+        "phpstan/phpstan": "^0.12.90"
+    },
+    "bin": [
+        "dotenv-validator"
+    ],
+    "autoload": {
+        "psr-4": {  "Impmurciego\\DotenvValidator\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {  "Impmurciego\\DotenvValidator\\Tests\\": "tests/" }
+    }
+}

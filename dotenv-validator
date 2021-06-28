@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+declare (strict_types=1);
+
+$autoloadPaths = [__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php'];
+foreach ($autoloadPaths as $file) {
+    if (file_exists($file)) {
+        require $file;
+        break;
+    }
+}
+
+use Impmurciego\DotenvValidator\Command\DotEnvValidatorCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application('DotENV Validator by Ines Perez.');
+$application->setDefaultCommand('validate');
+$application->add(new DotEnvValidatorCommand());
+$application->run();
