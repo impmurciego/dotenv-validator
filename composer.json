@@ -14,7 +14,6 @@
         "php": "^7.4|^8.0",
         "symfony/dotenv": "5.2.*",
         "symfony/console": "5.2.*",
-        "phpstan/phpstan": "^0.12.90",
         "ext-json": "*"
     },
     "bin": [
@@ -25,5 +24,8 @@
     },
     "autoload-dev": {
         "psr-4": {  "Impmurciego\\DotenvValidator\\Tests\\": "tests/" }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.90"
     }
 }
