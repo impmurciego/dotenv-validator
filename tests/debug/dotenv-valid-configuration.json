@@ -1,0 +1,4 @@
+{
+  "Production":  "./debug/environments/.env.prod",
+  "Staging" : "./debug/environments/.env.staging"
+}

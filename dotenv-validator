@@ -15,6 +15,7 @@ use Impmurciego\DotenvValidator\Command\DotEnvValidatorCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application('DotENV Validator by Ines Perez.');
-$application->setDefaultCommand('validate');
-$application->add(new DotEnvValidatorCommand());
+$command = new DotEnvValidatorCommand();
+$application->add($command);
+$application->setDefaultCommand($command->getName(), true);
 $application->run();
