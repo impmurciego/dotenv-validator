@@ -13,6 +13,7 @@ use Symfony\Component\Dotenv\Dotenv;
 
 final class DotEnvValidatorCommand extends Command
 {
+    private const CONFIG_FILE_PATH = './dotenv-validator.json';
     /** @var array<string, array<string, string>> */
     private array $loadedEnvironments = [];
 
@@ -29,18 +30,21 @@ final class DotEnvValidatorCommand extends Command
         $this
             ->setDescription(
                 'Check vars in all environments'
-            )
-            ->addArgument('environments',
-                InputArgument::REQUIRED,
-                "Name and path of the env file of the environments you want to validate. You must enter at least two like {'Production' => './.env.prod', 'Test' => './.env.test'}");
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $symfonyStyle = new SymfonyStyle($input, $output);
         $symfonyStyle->title('Check vars in all environment started');
-        /** @var string $environments */
-        $environments = $input->getArgument('environments');
+
+        $environments = $this->readConfigEnvironments();
+        if('' === $environments) {
+            $symfonyStyle->writeln("You must create a config file with at least two environments like {'Production' => './.env.prod', 'Test' => './.env.test'}");
+
+            return Command::FAILURE;
+        }
+
         /** @var array<string, string> $parsedEnvironments */
         $parsedEnvironments = json_decode($environments, true, 512, JSON_THROW_ON_ERROR);
 
@@ -71,6 +75,17 @@ final class DotEnvValidatorCommand extends Command
         return Command::SUCCESS;
     }
 
+    private function readConfigEnvironments(): string
+    {
+        $environments = file_get_contents(self::CONFIG_FILE_PATH);
+
+        if (false === $environments) {
+            return '';
+        }
+
+        return $environments;
+    }
+
     /**
      * @return array<string, array>
      */
@@ -90,6 +105,7 @@ final class DotEnvValidatorCommand extends Command
     /**
      * @param array<string, string>                $currentEnvironment
      * @param array<string, array<string, string>> $environmentsToCompare
+     * @return array
      */
     private function analyzeEnvironment(array $currentEnvironment, array $environmentsToCompare): array
     {
