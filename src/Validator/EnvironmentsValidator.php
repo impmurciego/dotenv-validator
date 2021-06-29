@@ -2,6 +2,7 @@
 
 namespace Impmurciego\DotenvValidator\Validator;
 
+use Impmurciego\DotenvValidator\Configuration\Environment;
 use Impmurciego\DotenvValidator\Configuration\EnvironmentCollection;
 use Impmurciego\DotenvValidator\Exception\FileNotFoundException;
 use Impmurciego\DotenvValidator\Exception\InvalidConfigurationException;
@@ -77,19 +78,23 @@ class EnvironmentsValidator
         $environmentsDiff = [];
 
         foreach ($environmentCollection->getEnvironments() as $environment) {
-            $environmentsToCompare = $environmentCollection;
-            $environmentsToCompare->remove($environment);
+            $environmentsToCompare = $environmentCollection->getEnvironments();
+            unset($environmentsToCompare[$environment->getName()]);
+
             $environmentsDiff[$environment->getName()] = $this->analyzeEnvironment($environment->getVariables(), $environmentsToCompare);
         }
 
         return $environmentsDiff;
     }
 
-    private function analyzeEnvironment(array $currentEnvironment, EnvironmentCollection $environmentsToCompare): array
+    /**
+     * @param array<string, Environment> $environmentsToCompare
+     */
+    private function analyzeEnvironment(array $currentEnvironment, array $environmentsToCompare): array
     {
         $environmentsDiff = [];
 
-        foreach ($environmentsToCompare->getEnvironments() as $environments) {
+        foreach ($environmentsToCompare as $environments) {
             $environmentsDiff[] = array_keys(array_diff_key($environments->getVariables(), $currentEnvironment));
         }
 
