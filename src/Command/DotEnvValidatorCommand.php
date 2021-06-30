@@ -45,7 +45,6 @@ final class DotEnvValidatorCommand extends Command
 
             return Command::FAILURE;
         } catch (InvalidDotEnvException $DotEnvException) {
-            $symfonyStyle->error('Error');
             $symfonyStyle->writeln($DotEnvException->getMessage());
             return Command::FAILURE;
         }

@@ -45,32 +45,38 @@ class EnvironmentsValidator
         }
 
         $environmentsDiff = $this->analyzeEnvironments($environmentCollection);
-        $error = false;
-        foreach ($environmentsDiff as $diffs) {
-            if (0 < count($diffs)) {
-                $error = true;
-                $this->output->error('Error');
-                $this->output->section('You must add the following variables:');
+        $hasErrors = $this->hasErrors($environmentsDiff);
 
-                foreach ($environmentsDiff as $name => $missedVars) {
-                    $this->printMissedVars($missedVars, $name);
-                }
-            }
-        }
+        if ($hasErrors) {
+            $this->printMissedVars($environmentsDiff);
 
-        if ($error) {
             throw new InvalidDotEnvException();
         }
     }
 
-    private function printMissedVars(array $missedVars, string $env): void
+    private function hasErrors(array $environmentsDiff): bool
     {
-        $this->output->table(
-            [$env],
-            array_map(static function (string $envVar) {
-                return [$envVar];
-            }, $missedVars)
-        );
+        foreach ($environmentsDiff as $diffs) {
+            if (0 < count($diffs)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function printMissedVars(array $environmentsDiff): void
+    {
+        $this->output->error('Error');
+        $this->output->section('You must add the following variables:');
+        foreach ($environmentsDiff as $name => $missedVars) {
+            $this->output->table(
+                [$name],
+                array_map(static function (string $envVar) {
+                    return [$envVar];
+                }, $missedVars)
+            );
+        }
     }
 
     private function analyzeEnvironments(EnvironmentCollection $environmentCollection): array
