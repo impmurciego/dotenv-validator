@@ -35,7 +35,6 @@ class EnvironmentReader
             foreach ($parsedEnvironments as $envName => $envFilePath) {
                 $environments[] = new Environment($envName, $envFilePath);
             }
-
         } catch (\JsonException $exception) {
             throw InvalidConfigurationException::fromFormat($configFile);
         }

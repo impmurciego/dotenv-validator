@@ -12,8 +12,8 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "symfony/dotenv": "5.4.*",
-    "symfony/console": "5.4.*",
+    "symfony/dotenv": "6.0.*",
+    "symfony/console": "6.0.*",
     "ext-json": "*"
   },
   "bin": [
@@ -32,7 +32,13 @@
   },
   "scripts": {
     "phpstan": "phpstan analyse src --level 8",
-    "cs-fix": "php-cs-fixer fix",
+    "cs-fix": "php8.1 ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --no-interaction --diff -vvv src/",
     "tests-unit": "phpunit --coverage-html=test-coverage-html"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "6.0.*"
+    }
   }
 }
