@@ -1,0 +1,11 @@
+includes:
+    - vendor/jangregor/phpstan-prophecy/extension.neon
+    - vendor/check24es/phpstan-behaviour/extension.neon
+    - phpstan-baseline.neon
+parameters:
+    level: max
+    excludePaths:
+        - /*/test/*
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+

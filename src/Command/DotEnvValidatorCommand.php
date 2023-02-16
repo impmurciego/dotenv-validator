@@ -38,7 +38,6 @@ final class DotEnvValidatorCommand extends Command
 
         try {
             $validator->validate();
-
         } catch (FileNotFoundException | InvalidConfigurationException $exception) {
             $symfonyStyle->error('Error');
             $symfonyStyle->writeln($exception->getMessage());
@@ -52,6 +51,5 @@ final class DotEnvValidatorCommand extends Command
         $symfonyStyle->success('Process finished');
 
         return Command::SUCCESS;
-
     }
 }

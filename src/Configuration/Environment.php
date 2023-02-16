@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Impmurciego\DotenvValidator\Configuration;
 
-
 class Environment
 {
     private string $name;
