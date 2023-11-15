@@ -12,8 +12,8 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "symfony/dotenv": "6.2.*",
-    "symfony/console": "6.2.*",
+    "symfony/dotenv": "6.3.*",
+    "symfony/console": "6.3.*",
     "ext-json": "*"
   },
   "bin": [
@@ -38,7 +38,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "6.0.*"
+      "require": "6.3.*"
     }
   }
 }
