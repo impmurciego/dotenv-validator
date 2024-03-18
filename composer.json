@@ -12,8 +12,8 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "symfony/dotenv": "6.3.*",
-    "symfony/console": "6.3.*",
+    "symfony/dotenv": "^6.4",
+    "symfony/console": "^6.4",
     "ext-json": "*"
   },
   "bin": [
@@ -26,13 +26,15 @@
     "psr-4": {  "Impmurciego\\DotenvValidator\\Tests\\": "tests/" }
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.12.90",
-    "phpunit/phpunit": "^9.5",
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "check24es/phpstan-behaviour": "^1.2",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "jangregor/phpstan-prophecy": "*",
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^9.5"
   },
   "scripts": {
     "phpstan": "phpstan analyse src --level 8",
-    "cs-fix": "php8.1 ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --no-interaction --diff -vvv src/",
+    "cs-fix": "php8.2 ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --no-interaction --diff -vvv src/",
     "tests-unit": "phpunit --coverage-html=test-coverage-html"
   },
   "extra": {
@@ -40,5 +42,12 @@
       "allow-contrib": false,
       "require": "6.3.*"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://bitbucket.check24.de/scm/sgo/phpstan-behaviour.git",
+      "reference": "master"
+    }
+  ]
 }
