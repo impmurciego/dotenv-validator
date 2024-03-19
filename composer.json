@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^8.1",
     "symfony/dotenv": "^6.4",
     "symfony/console": "^6.4",
     "ext-json": "*"
@@ -34,13 +34,13 @@
   },
   "scripts": {
     "phpstan": "phpstan analyse src --level 8",
-    "cs-fix": "php8.2 ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --no-interaction --diff -vvv src/",
+    "cs-fix": "php8.1  ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --no-interaction --diff -vvv src/",
     "tests-unit": "phpunit --coverage-html=test-coverage-html"
   },
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "6.3.*"
+      "require": "6.4.*"
     }
   },
   "repositories": [
