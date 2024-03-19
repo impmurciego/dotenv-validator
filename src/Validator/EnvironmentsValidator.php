@@ -10,7 +10,6 @@ use Impmurciego\DotenvValidator\Exception\InvalidDotEnvException;
 use Impmurciego\DotenvValidator\Output\OutputInterface;
 use Impmurciego\DotenvValidator\Reader\ConfigurationReader;
 use Impmurciego\DotenvValidator\Reader\EnvironmentReader;
-use Symfony\Component\Dotenv\Dotenv;
 
 class EnvironmentsValidator
 {
@@ -19,7 +18,6 @@ class EnvironmentsValidator
     private OutputInterface $output;
     private EnvironmentReader $environmentReader;
     private ConfigurationReader $configurationReader;
-    private Dotenv $dotenv;
 
     public function __construct(OutputInterface $output, string $configFilePath = self::CONFIG_FILE_PATH)
     {
@@ -27,7 +25,6 @@ class EnvironmentsValidator
         $this->configFilePath = $configFilePath;
         $this->environmentReader = new EnvironmentReader();
         $this->configurationReader = new ConfigurationReader();
-        $this->dotenv = new Dotenv();
     }
 
     /**
